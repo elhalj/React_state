@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <p>
+      You comment faire afficher lorsque l'on clique sur le boutton ? BLACKBOXAI
+      Pour afficher le profil de la personne lorsque vous cliquez sur le bouton,
+      vous devez suivre ces étapes dans votre composant basé sur des classes :
+      Initialiser l'état : Dans le constructeur de votre classe, vous devez
+      initialiser l'état avec les informations de la personne et un booléen
+      montre qui détermine si le profil doit être affiché ou non. Créer une
+      méthode pour basculer l'état : Créez une méthode qui met à jour l'état
+      montre lorsque le bouton est cliqué. Rendu conditionnel : Utilisez un
+      rendu conditionnel dans la méthode render() pour afficher le profil de la
+      personne si montre est vrai. Voici un exemple de code qui illustre ces
+      étapes :
+    </p>
+    <p>
+      <code>
+        import React, { Component } from 'react'; class App extends Component {
+        constructor(props) { super(props); this.state = { personne: { fullName:
+        'John Doe', bio: 'Développeur web', imgSrc: 'url_de_l_image', //
+        Remplacez par l'URL de l'image profession: 'Ingénieur logiciel' },
+        montre: false, elapsedTime: 0 }; this.toggleShow =
+        this.toggleShow.bind(this); } componentDidMount() { this.interval =
+        setInterval(() => { this.setState(prevState => ({ elapsedTime:
+        prevState.elapsedTime + 1 })); }, 1000); } componentWillUnmount() {
+        clearInterval(this.interval); } toggleShow() { this.setState(prevState
+        => ({ montre: !prevState.montre })); } render() { const { fullName, bio,
+        imgSrc, profession } = this.state.personne; const { montre, elapsedTime
+        } = this.state;</code
+      >
+
+      <code
+        >return (
+        <div>
+          <button onClick="{this.toggleShow}">
+            {montre ? 'Cacher le profil' : 'Afficher le profil'}
+          </button>
+          {montre && (
+          <div>
+            <h1>{fullName}</h1>
+            <p>{bio}</p>
+            <img src="{imgSrc}" alt="{fullName}" />
+            <p>{profession}</p>
+          </div>
+          )}
+          <p>Temps écoulé : {elapsedTime} secondes</p>
+        </div>
+        );</code
+      >
+      } } export default App;
+    </p>
+
+    <h2>Explication du code :</h2>
+    <p>
+      État initial : L'état est initialisé avec les informations de la personne
+      et montre est défini sur false. Méthode toggleShow : Cette méthode inverse
+      la valeur de montre chaque fois que le bouton est cliqué. Rendu
+      conditionnel : Le profil de la personne est affiché uniquement si montre
+      est vrai. Gestion du temps écoulé : Un intervalle est mis en place pour
+      suivre le temps écoulé depuis le montage du composant. Avec ce code,
+      lorsque vous cliquez sur le bouton, le profil de la personne s'affichera
+      ou se cachera en fonction de l'état montre.
+    </p>
+  </body>
+</html>
